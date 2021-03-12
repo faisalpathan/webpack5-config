@@ -1,9 +1,13 @@
+const path = require("path")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     target: process.env.NODE_ENV === 'production' ? 'browserslist' : 'web', // hot reload bug on webpack due to which we have done this
     output: {
+        path: path.resolve(__dirname, "dist"),
         assetModuleFilename: "images/[hash][ext][query]"
     },
     module: {
@@ -34,7 +38,11 @@ module.exports = {
         ]
     },
 
-    plugins: [new MiniCssExtractPlugin()],
+    plugins: [
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({ template: './src/index.html' })
+    ],
 
     resolve: {
         extensions: [".js", ".jsx"]
