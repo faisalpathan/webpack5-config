@@ -1,3 +1,5 @@
+import './styles/index.scss'
+
 const pokemons = {
     electric: "pikachu",
     water: "squartle",
